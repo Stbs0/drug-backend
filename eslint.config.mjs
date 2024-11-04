@@ -1,10 +1,11 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import stylistic from '@stylistic/eslint-plugin';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default tseslint.config({
   files: ['**/*.ts'],
-  extends: [eslint.configs.recommended, ...tseslint.configs.recommendedTypeChecked],
+  extends: [eslint.configs.recommended, ...tseslint.configs.recommendedTypeChecked, eslintConfigPrettier],
   languageOptions: {
     parserOptions: {
       project: true,

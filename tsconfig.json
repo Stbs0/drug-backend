@@ -16,7 +16,6 @@
     "outDir": "dist",
     "rootDir": "src",
     "allowJs": true,
-    "noEmit": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,

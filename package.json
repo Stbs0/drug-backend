@@ -32,7 +32,6 @@
     "winston": "^3.16.0",
     "zod": "^3.23.8"
   },
- 
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@stylistic/eslint-plugin": "^2.10.1",
@@ -44,6 +43,7 @@
     "@types/node": "^22.8.6",
     "cross-env": "^7.0.3",
     "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
     "globals": "^15.11.0",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",

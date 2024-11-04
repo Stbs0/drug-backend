@@ -1,10 +1,8 @@
-import { createLogger, format, transports } from "winston";
-
+import { createLogger, format, transports } from 'winston';
 
 const logger = createLogger({
   level: 'info',
   format: format.combine(
-  
     format.errors({ stack: true }), // Adds stack trace for errors
     format.splat(), // Allows parameterized logging
     format.json(),

@@ -1,9 +1,8 @@
-
-import dotenv from "dotenv";
-import app from "./app.js";
+import dotenv from 'dotenv';
+import app from './app.js';
 
 dotenv.config();
 
 app.listen(process.env.PORT, () => {
-  console.log("Server started on port 3000");
+  console.log('Server started on port 3000');
 });

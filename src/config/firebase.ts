@@ -3,7 +3,7 @@ import admin from 'firebase-admin';
 import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
-import firebaseServiceAccount from '@config/firebaseServiceAccount.json';
+import firebaseServiceAccount from '@config/FirebaeAccount.json';
 
 admin.initializeApp({
   credential: admin.credential.cert(firebaseServiceAccount as ServiceAccount),
@@ -14,4 +14,3 @@ initializeApp({
 });
 
 export const db = getFirestore();
-
