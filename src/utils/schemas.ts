@@ -6,3 +6,8 @@ export const createUserSchema = z.object({
   password: z.string().min(6, 'must be more than 6 characters'),
   conformPassword: z.string().min(6, 'must be more than 6 characters'),
 });
+export const signInSchema = z.object({
+  email: z.string().email(),
+
+  password: z.string().min(6, 'must be more than 6 characters'),
+});

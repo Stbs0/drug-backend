@@ -4,14 +4,12 @@
     "lib": ["es2020"],
     "typeRoots": ["node_modules/@types"],
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
     "pretty": true,
     "sourceMap": true,
-    "declaration": true,
+    
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
@@ -20,8 +18,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "baseUrl": "src",
-    
+    "baseUrl": "src"
   },
   "include": ["src/**/*.ts", "src/*.json", ".env"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
