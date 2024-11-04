@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-import drugRouter from './routers/drugs.js';
-import userRouter from './routers/users.js';
+
 import { requestLogger, unknownEndpoint } from './utils/middleware.js';
+import drugRouter from 'routers/drugRouter.js';
+import userRouter from 'routers/userRouter.js';
 
 const app = express();
 app.use(express.json());

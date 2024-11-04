@@ -9,7 +9,7 @@ export const requestLogger = (request: Request, response: Response, next: NextFu
   next();
 };
 
-export const unknownEndpoint = (_request, response: Response) => {
+export const unknownEndpoint = (_request: Request, response: Response) => {
   response.status(404).send({ error: 'unknown endpoint' });
 };
 

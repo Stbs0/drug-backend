@@ -1,16 +1,14 @@
 import admin from 'firebase-admin';
 
-import { initializeApp, cert, ServiceAccount } from 'firebase-admin/app';
+import { ServiceAccount } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 
-import firebaseServiceAccount from '@config/FirebaeAccount.json';
+import FirebaeAccount from './FirebaeAccount.json';
 
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseServiceAccount as ServiceAccount),
+  credential: admin.credential.cert(FirebaeAccount as ServiceAccount),
 });
 
-initializeApp({
-  credential: cert(firebaseServiceAccount as ServiceAccount),
-});
+const db = getFirestore();
 
-export const db = getFirestore();
+export default db;
