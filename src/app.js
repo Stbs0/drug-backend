@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var cors_1 = require("cors");
+var helmet_1 = require("helmet");
+var middleware_1 = require("./utils/middleware");
+var drugs_1 = require("@/routers/drugs");
+var users_1 = require("./routers/users");
+var app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, helmet_1.default)());
+app.use((0, cors_1.default)());
+app.use(express_1.default.json());
+app.use(middleware_1.requestLogger);
+app.use('/drug', drugs_1.default);
+app.use('/user', users_1.default);
+app.get('/ping', function (_req, res) {
+    console.log('someone pinged here');
+    res.send('pong');
+});
+app.use('/*', middleware_1.unknownEndpoint);
+exports.default = app;

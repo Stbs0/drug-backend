@@ -1,0 +1,1 @@
+{"version":3,"file":"drugs.js","sourceRoot":"","sources":["../../src/routers/drugs.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,SAAS,CAAC;AAE9B,MAAM,UAAU,GAAG,OAAO,CAAC,MAAM,EAAE,CAAC;AAEpC,UAAU,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,IAAI,EAAE,IAAI,EAAE,EAAE,GAAE,CAAC,CAAC,CAAC;AAExC,eAAe,UAAU,CAAC"}
