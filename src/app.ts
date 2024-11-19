@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { requestLogger, unknownEndpoint } from './utils/middleware.js';
+import { errorHandler, requestLogger, unknownEndpoint } from './utils/middleware.js';
 import drugRouter from 'routers/drugRouter.js';
 import userRouter from 'routers/userRouter.js';
 
@@ -14,8 +14,8 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 
-app.use('/drug', drugRouter);
-app.use('/user', userRouter);
+app.use('/v1/drug', drugRouter);
+app.use('/v1/user', userRouter);
 
 app.get('/ping', (_req, res) => {
   console.log('someone pinged here');
@@ -23,5 +23,7 @@ app.get('/ping', (_req, res) => {
 });
 
 app.use('/*', unknownEndpoint);
+
+app.use(errorHandler);
 
 export default app;

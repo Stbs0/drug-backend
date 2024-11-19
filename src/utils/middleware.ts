@@ -1,5 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
+import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import logger from './logger.js';
+import { getToken } from './utils.js';
+import asyncHandler from 'express-async-handler';
+import { verifyIdToken } from './verifyToken.js';
+import db from 'config/firebase.js';
+import { FullUser, NewUser } from 'types.js';
 
 export const requestLogger = (request: Request, response: Response, next: NextFunction) => {
   logger.info(`Method:  ${request.method}`);
@@ -13,16 +18,34 @@ export const unknownEndpoint = (_request: Request, response: Response) => {
   response.status(404).send({ error: 'unknown endpoint' });
 };
 
-// export const errorHandler = (error: ErrorRequestHandler, request: Request, response: Response, next: NextFunction) => {
-//   if ("message" in error) {
-//     logger.error(error.message);
-//   }
+export const errorHandler = (error: ErrorRequestHandler, req: Request, res: Response, _next: NextFunction) => {
+  if ('message' in error) {
+    logger.error(error.message);
+  }
 
-//   if (error.name === 'CastError') {
-//     return response.status(400).send({ error: 'malformatted id' });
-//   } else if (error.name === 'ValidationError') {
-//     return response.status(400).json({ error: error.message });
-//   }
+  res.send({ error });
+};
 
-//   next(error);
-// };
+export const authMiddleware = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  if (!req.headers.authorization) {
+    throw new Error('Unauthorized');
+  }
+  const token = getToken(req.headers.authorization);
+  if (!token) {
+    throw new Error('Unauthorized');
+  }
+
+  const decodedToken = await verifyIdToken(token);
+  if (!decodedToken) {
+    throw new Error('Unauthorized');
+  }
+
+  const userDoc = await db.collection('users').doc(decodedToken.uid).get();
+
+  if (!userDoc.exists) {
+    throw new Error('Unauthorized');
+  }
+  const user = userDoc.data() as FullUser | NewUser;
+  req.user = user;
+  next();
+});

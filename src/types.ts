@@ -1,15 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
-import { createUserSchema } from './utils/schemas.js';
+import { extraInfoUser, signInSchema } from 'utils/schemas.js';
+import { Request } from 'express';
 import { z } from 'zod';
-type MiddlewareWithNext = {
-  req: Request;
-  res: Response;
-  next: NextFunction;
-};
-type Middleware = Omit<MiddlewareWithNext, 'next'>;
 
-type MiddlewareHandler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
+export type NewUser = z.infer<typeof signInSchema>;
 
-export { MiddlewareWithNext, Middleware, MiddlewareHandler };
+export type ExtraInfoUser = z.infer<typeof extraInfoUser>;
 
-export type User = z.infer<typeof createUserSchema>;
+export type FullUser = ExtraInfoUser & NewUser;
+
+export type RequestWithUser = Request & { user: FullUser };

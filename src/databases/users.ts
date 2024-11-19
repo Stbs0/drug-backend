@@ -1,4 +1,4 @@
-import { User } from 'types.js';
+import { NewUser } from 'types.js';
 import { usersRefs } from './refs.js';
 
 export const getUserDB = async (id: string) => {
@@ -11,7 +11,9 @@ export const getUserByEmail = async (email: string) => {
 
   return users;
 };
-export const createUserDB = async (newUser: User) => {
+
+// TODO: remove the add bc its automaticlly set the id
+export const createUserDB = async (newUser: NewUser) => {
   const ref = await usersRefs.add(newUser);
 
   return await usersRefs.doc(ref.id).get();
