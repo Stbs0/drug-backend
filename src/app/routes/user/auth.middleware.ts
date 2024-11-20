@@ -1,5 +1,5 @@
 import { auth } from '@/app/config/firebase.js';
-import HttpException from '@/app/httpException.js';
+import HttpException from '@/app/utils/httpException.js';
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
 import { getToken } from './token.utils.js';

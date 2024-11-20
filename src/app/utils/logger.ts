@@ -5,7 +5,7 @@ const logger = createLogger({
   format: format.combine(
     format.errors({ stack: true }), // Adds stack trace for errors
     format.splat(), // Allows parameterized logging
-    format.json(),
+    format.json()
   ),
 });
 
@@ -17,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
   logger.add(
     new transports.Console({
       format: format.combine(format.colorize(), format.simple()),
-    }),
+    })
   );
 }
 

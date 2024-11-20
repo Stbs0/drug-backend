@@ -1,5 +1,5 @@
 import { completeProfileSchema, createUserSchema } from './user-request.schema.js';
-import HttpException from '@/app/httpException.js';
+import HttpException from '@/app/utils/httpException.js';
 import db from '@/app/config/firebase.js';
 
 export const createUser = async (newUserPayload: unknown, uid: string) => {
