@@ -1,10 +1,10 @@
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 
-const drugRouter = express.Router();
+const drugRoute = express.Router();
 
-drugRouter.post(
-  '/',
+drugRoute.post(
+  '/drug',
   asyncHandler(async (_req, _res) => {
     // const name = await getAproximmateName(req.body.name);
     // console.log("name",name);
@@ -15,4 +15,4 @@ drugRouter.post(
   }),
 );
 
-export default drugRouter;
+export default drugRoute;

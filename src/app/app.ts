@@ -2,9 +2,8 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 
-import { errorHandler, requestLogger, unknownEndpoint } from './utils/middleware.js';
-import drugRouter from 'routers/drugRouter.js';
-import userRouter from 'routers/userRouter.js';
+import { errorHandler, requestLogger, unknownEndpoint } from './middleware.js';
+import api from './routes/route.js';
 
 const app = express();
 app.use(express.json());
@@ -14,8 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(requestLogger);
 
-app.use('/v1/drug', drugRouter);
-app.use('/v1/user', userRouter);
+app.use('api/v1', api);
 
 app.get('/ping', (_req, res) => {
   console.log('someone pinged here');

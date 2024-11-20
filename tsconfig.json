@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "lib": ["es2020"],
-    "typeRoots": ["node_modules/@types", "./src/types"],
+    "typeRoots": ["node_modules/@types", "src/types"],
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "NodeNext",
@@ -18,8 +18,11 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "baseUrl": "src"
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/*.json", ".env", "tests-examples/types.ts", "src/scraping/**/*.ts"],
+  "include": ["src/**/*.ts", "src/*.json", ".env"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
 }
