@@ -12,7 +12,7 @@ drugRoute.post(
     // console.log("removedSalts",removedSalts);
     // const drug = await getDrugInfo(removedSalts);
     // res.json(drug);
-  }),
+  })
 );
 
 export default drugRoute;
