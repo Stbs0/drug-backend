@@ -1,8 +1,10 @@
-import { auth } from '@/app/config/firebase.js';
-import HttpException from '@/app/utils/httpException.js';
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
 import { getToken } from './token.utils.js';
+import HttpException from '@/app/utils/httpException.js';
+import { auth } from '@/app/config/firebase.js';
+import { getUser } from './user.controller.js';
+import { FullUser, NewUserType } from './user.types.js';
 
 export const authMiddleware = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   if (!req.headers.authorization) {
@@ -18,7 +20,11 @@ export const authMiddleware = asyncHandler(async (req: Request, res: Response, n
   if (!decodedToken) {
     throw new HttpException(401, 'Unauthorized');
   }
-
-  req.user = { uid: decodedToken.uid };
+  const user = await getUser(decodedToken.uid);
+  if (user) {
+    req.user = user as FullUser | NewUserType;
+  }
+  console.log(typeof user);
+  console.log('ssss', decodedToken);
   next();
 });

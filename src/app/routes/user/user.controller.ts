@@ -32,11 +32,11 @@ export const createUser = async (newUserPayload: unknown, uid: string) => {
 
 export const getUser = async (uid: string) => {
   const userDoc = await db.collection('users').doc(uid).get();
-
-  if (!userDoc.exists) {
+  const user = userDoc.data();
+  if (!user) {
     throw new HttpException(404, 'User not found');
   }
-  return userDoc;
+  return user;
 };
 
 export const completeProfile = async (completeProfilePayload: unknown, uid: string) => {
