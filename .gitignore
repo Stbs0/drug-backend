@@ -1,7 +1,9 @@
 node_modules
-.env
+.env*
 FirebaeAccount.json
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+firebase.*
+*.log
