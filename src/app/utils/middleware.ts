@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import logger from './logger.js';
 import HttpException from './httpException.js';
-import { FirebaseError } from 'node_modules/firebase-admin/lib/utils/error.js';
+import { FirebaseAppError } from 'firebase-admin/app';
 
 export const requestLogger = (request: Request, response: Response, next: NextFunction) => {
   logger.info(`Method:  ${request.method}`);
@@ -20,7 +20,7 @@ export const errorHandler = (error: unknown, req: Request, res: Response, _next:
     logger.error(error.message);
     res.status(error.errorCode).send({ error: error.getError() });
   }
-  if (error instanceof FirebaseError) {
+  if (error instanceof FirebaseAppError) {
     logger.error(error.message);
     res.status(500).send({ error: error.message });
   }
