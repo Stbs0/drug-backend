@@ -15,3 +15,15 @@ export const completeProfileSchema = z.object({
   university: z.string(),
   occupation: z.string(),
 });
+
+export const updateUserSchema = z.object({
+  email: z.string().email().optional(),
+  providerId: z.string().optional(),
+  phoneNumber: z.string().optional(),
+  photoURL: z.string().optional(),
+  name: z.string().optional(),
+  uid: z.string().optional(),
+  age: z.string().optional(),
+  university: z.string().optional(),
+  occupation: z.string().optional(),
+});

@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
+import { auth } from '@/app/config/firebase.js';
+import HttpException from '@/app/utils/httpException.js';
+import { NextFunction, Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { getToken } from './token.utils.js';
-import HttpException from '@/app/utils/httpException.js';
-import { auth } from '@/app/config/firebase.js';
 import { getUser } from './user.controller.js';
 import { FullUser, NewUserType } from './user.types.js';
 
@@ -25,6 +25,5 @@ export const authMiddleware = asyncHandler(async (req: Request, res: Response, n
     req.user = user as FullUser | NewUserType;
   }
   console.log(typeof user);
-  console.log('ssss', decodedToken);
   next();
 });

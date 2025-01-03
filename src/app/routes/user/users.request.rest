@@ -1,4 +1,15 @@
-POST http://localhost:1574/user/create
+
+POST http://localhost:3001/api/v1/user/create
+Content-Type: application/json
+
+{
+    "email":"dfsdfs@dfs.com",
+    "username":"dfsfsf",
+    "password":"sdfgvsd",
+    "conformPassword":"svsddcvv"
+}
+###
+POST http://localhost:3001/user/create
 Content-Type: application/json
 
 {

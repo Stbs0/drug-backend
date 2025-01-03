@@ -1,17 +1,11 @@
-import { completeProfileSchema, createUserSchema } from './user-request.schema.js';
-import HttpException from '@/app/utils/httpException.js';
 import db from '@/app/config/firebase.js';
+import HttpException from '@/app/utils/httpException.js';
+import { CompleteProfileType, NewUserType, UpdateUserType } from './user.types.js';
+const userCollection = db.collection('users');
+export const createUser = async (newUserPayload: NewUserType, uid: string) => {
+  const { email, displayName, photoURL, phoneNumber, providerId } = newUserPayload;
 
-export const createUser = async (newUserPayload: unknown, uid: string) => {
-  const parsedBody = createUserSchema.safeParse(newUserPayload);
-
-  if (!parsedBody.success) {
-    throw new HttpException(400, parsedBody.error.message);
-  }
-
-  const { email, displayName, photoURL, phoneNumber, providerId } = parsedBody.data;
-
-  const userRef = db.collection('users').doc(uid);
+  const userRef = userCollection.doc(uid);
 
   await userRef.set({
     email,
@@ -25,13 +19,11 @@ export const createUser = async (newUserPayload: unknown, uid: string) => {
 
   const userDoc = await userRef.get();
 
-  console.log(userDoc);
-
   return userDoc;
 };
 
 export const getUser = async (uid: string) => {
-  const userDoc = await db.collection('users').doc(uid).get();
+  const userDoc = await userCollection.doc(uid).get();
   const user = userDoc.data();
   if (!user) {
     throw new HttpException(404, 'User not found');
@@ -39,16 +31,10 @@ export const getUser = async (uid: string) => {
   return user;
 };
 
-export const completeProfile = async (completeProfilePayload: unknown, uid: string) => {
-  const parsedBody = completeProfileSchema.safeParse(completeProfilePayload);
+export const completeProfile = async (completeProfilePayload: CompleteProfileType, uid: string) => {
+  const { age, phoneNumber, university, occupation } = completeProfilePayload;
 
-  if (!parsedBody.success) {
-    throw new HttpException(400, parsedBody.error.message);
-  }
-
-  const { age, phoneNumber, university, occupation } = parsedBody.data;
-
-  const userRef = db.collection('users').doc(uid);
+  const userRef = userCollection.doc(uid);
   await userRef.update({
     age,
     phoneNumber,
@@ -60,4 +46,9 @@ export const completeProfile = async (completeProfilePayload: unknown, uid: stri
   const userDoc = await userRef.get();
 
   return userDoc;
+};
+export const updateUser = async (uid: string, payload: UpdateUserType) => {
+  const userRef = userCollection.doc(uid);
+
+  await userRef.update({ ...payload });
 };
