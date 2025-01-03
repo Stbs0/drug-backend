@@ -24,6 +24,5 @@ export const authMiddleware = asyncHandler(async (req: Request, res: Response, n
   if (user) {
     req.user = user as FullUser | NewUserType;
   }
-  console.log(typeof user);
   next();
 });

@@ -9,7 +9,7 @@ Content-Type: application/json
     "conformPassword":"svsddcvv"
 }
 ###
-POST http://localhost:3001/user/create
+POST http://localhost:3001/api/v1/user/create
 Content-Type: application/json
 
 {
