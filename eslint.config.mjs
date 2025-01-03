@@ -20,9 +20,7 @@ export default tseslint.config({
     '@stylistic/semi': 'error',
     '@typescript-eslint/no-unsafe-assignment': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-  
-  
-  
+
     '@typescript-eslint/restrict-plus-operands': 'off',
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
   },
