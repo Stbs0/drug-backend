@@ -23,7 +23,7 @@ export const errorHandler = (error: unknown, req: Request, res: Response, _next:
   }
   if (error instanceof FirebaseAppError) {
     logger.error(error.message);
-    res.status(500).send({ error: error.message, errorCode: error.cause });
+    res.status(500).send({ error, errorCode: error.cause });
 
     return;
   }
@@ -34,5 +34,5 @@ export const errorHandler = (error: unknown, req: Request, res: Response, _next:
     return;
   }
   console.log(error);
-  res.status(500).send({ error });
+  res.status(500).send(error);
 };
