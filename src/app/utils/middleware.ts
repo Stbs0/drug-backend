@@ -17,13 +17,13 @@ export const unknownEndpoint = (_request: Request, response: Response) => {
 
 export const errorHandler = (error: unknown, req: Request, res: Response, _next: NextFunction) => {
   if (error instanceof HttpException) {
-    logger.error(error.message);
-    res.status(error.errorCode).send({ error: error.getError(), errorCode: error.errorCode });
+    logger.error(error);
+    res.status(error.errorCode).json(error);
     return;
   }
   if (error instanceof FirebaseAppError) {
-    logger.error(error.message);
-    res.status(500).send({ error, errorCode: error.cause });
+    logger.error(error);
+    res.status(500).json(error);
 
     return;
   }
